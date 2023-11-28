@@ -1,11 +1,13 @@
 import React from 'react';
 import {AddContact, Example} from '../screens';
 import {createStackNavigator} from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {View, Text} from 'react-native';
 import {Colors} from '@/theme/Variables';
-import DetailContact from '@/screens/DetailContact/DetailContact';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const CustomAppBar = (title: String) => {
   return (
@@ -21,16 +23,41 @@ const CustomAppBar = (title: String) => {
 // @refresh reset
 const MainNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: true}}>
-      <Stack.Screen
-        name="Home"
-        component={DetailContact}
+    <Tab.Navigator
+    screenOptions={() => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName  = '';
+
+        if (true) {
+          iconName = focused
+            ? 'ios-information-circle'
+            : 'ios-information-circle-outline';
+        } else if (true) {
+          iconName = focused ? 'ios-list' : 'ios-list-outline';
+        }
+
+        // You can return any component that you like here!
+        return <Ionicons name={iconName} size={size} color={color} />;
+      },
+      tabBarActiveTintColor: 'tomato',
+      tabBarInactiveTintColor: 'gray',
+    })}
+    >
+      <Tab.Screen
+        name="AddContact"
+        component={AddContact}
         options={{
-          headerShown: true,
-          header: () => CustomAppBar("Add Contact"),
+          header: () => CustomAppBar('Add Contact'),
         }}
       />
-    </Stack.Navigator>
+      <Tab.Screen
+        name="Example"
+        component={Example}
+        options={{
+          tabBarLabel: 'Example',
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 
