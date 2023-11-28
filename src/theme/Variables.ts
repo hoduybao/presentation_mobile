@@ -14,6 +14,7 @@ export const Colors = {
   transparent: 'rgba(0,0,0,0)',
   inputBackground: '#FFFFFF',
   white: '#ffffff',
+  blue: '#00A6FB',
   //Typography
   textGray800: '#000000',
   textGray400: '#4D4D4D',
