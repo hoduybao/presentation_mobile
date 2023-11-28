@@ -3,6 +3,7 @@ import {AddContact, Example} from '../screens';
 import {createStackNavigator} from '@react-navigation/stack';
 import {View, Text} from 'react-native';
 import {Colors} from '@/theme/Variables';
+import DetailContact from '@/screens/DetailContact/DetailContact';
 
 const Stack = createStackNavigator();
 
@@ -23,7 +24,7 @@ const MainNavigator = () => {
     <Stack.Navigator screenOptions={{headerShown: true}}>
       <Stack.Screen
         name="Home"
-        component={AddContact}
+        component={DetailContact}
         options={{
           headerShown: true,
           header: () => CustomAppBar("Add Contact"),
