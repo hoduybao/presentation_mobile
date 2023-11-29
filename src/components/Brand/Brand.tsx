@@ -17,7 +17,7 @@ const Brand = ({ height, width, mode }: Props) => {
         testID={'brand-img'}
         style={Layout.fullSize}
         source={Images.logo}
-        resizeMode={mode}
+        resizeMode={mode} 
       />
     </View>
   );

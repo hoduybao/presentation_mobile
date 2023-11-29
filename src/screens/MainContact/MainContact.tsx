@@ -1,29 +1,16 @@
 import React, {useEffect} from 'react';
-import {
-  View,
-  ScrollView,
-} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {useTranslation} from 'react-i18next';
+import {useSelector} from 'react-redux';
+
 import {useTheme} from '../../hooks';
-import {changeTheme, ThemeState} from '../../store/theme';
-import i18next from 'i18next';
 import ContactList from '@/components/ContactList/ContactList';
-import { FAB } from 'react-native-elements';
+import {FAB} from 'react-native-elements';
 
-const MainContact = ({navigation} : any) => {
-  const {t} = useTranslation(['example', 'welcome']);
-  const {Common, Fonts, Gutters, Layout,Colors ,Images, darkMode: isDark} = useTheme();
-  const dispatch = useDispatch();
-
-  const onChangeTheme = ({theme, darkMode}: Partial<ThemeState>) => {
-    dispatch(changeTheme({theme, darkMode}));
-  };
-
-  const onChangeLanguage = (lang: 'fr' | 'en') => {
-    i18next.changeLanguage(lang);
-  };
- 
+const MainContact = ({navigation}: any) => {
+  const {listContact} = useSelector(state => state.contactReducer);
+  console.log(listContact); 
+  const {Gutters, Layout, Colors} = useTheme();
 
   return (
     <ScrollView
@@ -34,23 +21,21 @@ const MainContact = ({navigation} : any) => {
         Layout.colCenter,
         Layout.scrollSpaceBetween,
       ]}>
-      <View style= {[Layout.fullSize, Gutters.smallLMargin]}>
+      <View style={[Layout.fullSize, Gutters.smallLMargin]}>
         <ContactList navigation={navigation} />
       </View>
       <FAB
         visible={true}
-        onPress={() =>{
-          navigation.navigate("AddContact")
+        onPress={() => {
+          navigation.navigate('AddContact');
         }}
         placement="right"
         title="Add Contact"
-        icon={{ name: 'add', color: 'white' }}
-        color= {Colors.blue}
+        icon={{name: 'add', color: 'white'}}
+        color={Colors.blue}
       />
     </ScrollView>
   );
-
-}
+};
 
 export default MainContact;
-

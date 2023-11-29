@@ -1,7 +1,6 @@
 import {useTheme} from '@/hooks';
 import {Colors} from '@/theme/Variables';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import { current } from '@reduxjs/toolkit';
 import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements'; // Hoặc import từ thư viện icon khác
@@ -13,7 +12,6 @@ type DetailContactRouteParams = {
 };
 
 const DetailContact = () => {
-  const {Layout, Gutters, Fonts, FontSize} = useTheme();
   const route =
     useRoute<RouteProp<Record<string, DetailContactRouteParams>, string>>();
   const {data, navigation} = route.params;
@@ -29,7 +27,7 @@ const DetailContact = () => {
 
   const handleEdit = () => {
     // Handle edit action
-    navigation?.navigate("EditContact", {data, navigation});
+    navigation?.navigate('EditContact', {data, navigation});
   };
 
   const handleDelete = () => {

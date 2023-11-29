@@ -1,28 +1,24 @@
 import React from 'react';
-import {AddContact, EditContact, Example, MainContact} from '../screens';
+import {AddContact, EditContact, MainContact} from '../screens';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import {View, Text} from 'react-native';
-import {Colors} from '@/theme/Variables';
+import {createStackNavigator} from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {NavigationContainer} from '@react-navigation/native';
-import Header from '@/components/Header/Hearder';
 import HistoryContact from '@/screens/HistoryContact/HistoryContact';
 import DetailContact from '@/screens/DetailContact/DetailContact';
 
 const Tab = createBottomTabNavigator();
 
-
 // Screens names
-const HomeName = "Home";
-const historyName = "History";
+const HomeName = 'Home';
+const historyName = 'History';
 
 // Stack Screens
 const HomeStack = createStackNavigator();
 
 function HomeStackScreen() {
   return (
-    <HomeStack.Navigator >
+    <HomeStack.Navigator>
       <HomeStack.Screen name="Contact" component={MainContact} />
       <HomeStack.Screen name="AddContact" component={AddContact} />
       <HomeStack.Screen name="DetailContact" component={DetailContact} />
@@ -35,48 +31,29 @@ const HistoryStack = createStackNavigator();
 
 function HistoryStackScreen() {
   return (
-    <HomeStack.Navigator >
+    <HomeStack.Navigator>
       <HomeStack.Screen name="History" component={HistoryContact} />
       <HomeStack.Screen name="AddContact" component={AddContact} />
     </HomeStack.Navigator>
   );
 }
 
-// const CustomAppBar = (title: String) => {
-//   return (
-//     <View
-//       style={{
-//         height: 50,
-//         backgroundColor: Colors.blue,
-//         display: 'flex',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         flexDirection: 'row',
-//       }}>
-//       {/* Nội dung thanh appbar, ví dụ: */}
-//       <Text style={{fontSize: 18, fontWeight: 'bold', color: '#FFFFFF'}}>
-//         {title}
-//       </Text>
-//     </View>
-//   );
-// };
-
 // @refresh reset
 const MainNavigator = () => {
   return (
-    <NavigationContainer independent = {true}>
+    <NavigationContainer independent={true}>
       <Tab.Navigator
-      initialRouteName={HomeName}
+        initialRouteName={HomeName}
         screenOptions={({route}) => ({
           tabBarIcon: ({focused, color, size}) => {
             let iconName;
             let rn = route.name;
-            if(rn === HomeName){
-              iconName = focused ? "person" : "person-outline"
+            if (rn === HomeName) {
+              iconName = focused ? 'person' : 'person-outline';
             } else {
-              iconName = focused ? "time" : "time-outline"
+              iconName = focused ? 'time' : 'time-outline';
             }
-           
+
             // You can return any component that you like here!
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -85,7 +62,7 @@ const MainNavigator = () => {
           name={HomeName}
           component={HomeStackScreen}
           options={{
-            headerShown: false
+            headerShown: false,
           }}
         />
         <Tab.Screen

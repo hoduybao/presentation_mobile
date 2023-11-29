@@ -1,38 +1,19 @@
 import React, {useEffect} from 'react';
 import {
   View,
-  ActivityIndicator,
   Text,
   TouchableOpacity,
   ScrollView,
-  Image,
-  Alert,
   TextInput,
   StyleSheet,
-  Button,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
-import {useTranslation} from 'react-i18next';
-import {Brand} from '../../components';
 import {useTheme} from '../../hooks';
-import {useLazyFetchOneQuery} from '../../services/modules/users';
-import {changeTheme, ThemeState} from '../../store/theme';
-import i18next from 'i18next';
-import {Colors, FontSize} from '@/theme/Variables';
-import Buttons from '@/theme/components/Buttons';
+import {Colors} from '@/theme/Variables';
 
 const AddContact = () => {
-  const {t} = useTranslation(['example', 'welcome']);
-  const {Common, Fonts, Gutters, Layout, Images, darkMode: isDark} = useTheme();
+  const {Fonts, Gutters, Layout, darkMode: isDark} = useTheme();
   const dispatch = useDispatch();
-
-  const onChangeTheme = ({theme, darkMode}: Partial<ThemeState>) => {
-    dispatch(changeTheme({theme, darkMode}));
-  };
-
-  const onChangeLanguage = (lang: 'fr' | 'en') => {
-    i18next.changeLanguage(lang);
-  };
 
   return (
     <ScrollView
@@ -45,7 +26,6 @@ const AddContact = () => {
       ]}>
       <View style={[Layout.fullSize]}>
         <View style={[Layout.col, Layout.fullHeight, Gutters.smallTMargin]}>
-
           <View style={[Gutters.smallMargin]}>
             <Text
               style={[Fonts.textBold, Fonts.titleSmall, Gutters.tinyBMargin]}>
@@ -64,7 +44,7 @@ const AddContact = () => {
 
           <View style={[Gutters.smallMargin]}>
             <TouchableOpacity style={[styles.button, Layout.alignItemsCenter]}>
-                <Text style={styles.appButtonText}>Save</Text>
+              <Text style={styles.appButtonText}>Save</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -91,11 +71,11 @@ const styles = StyleSheet.create({
   },
   appButtonText: {
     fontSize: 18,
-    color: "#fff",
-    fontWeight: "bold",
-    textAlign: "center",
-    textTransform: "uppercase"
-  }
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+  },
 });
 
 export default AddContact;

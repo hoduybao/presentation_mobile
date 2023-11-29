@@ -8,10 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
-import {useTranslation} from 'react-i18next';
 import {useTheme} from '../../hooks';
-import {changeTheme, ThemeState} from '../../store/theme';
-import i18next from 'i18next';
 import {Colors, FontSize} from '@/theme/Variables';
 import {RouteProp, useRoute} from '@react-navigation/native';
 
@@ -22,20 +19,11 @@ type DetailContactRouteParams = {
 };
 
 const EditContact = () => {
-  const {t} = useTranslation(['example', 'welcome']);
   const route =
     useRoute<RouteProp<Record<string, DetailContactRouteParams>, string>>();
   const {data, navigation} = route.params;
-  const {Common, Fonts, Gutters, Layout, Images, darkMode: isDark} = useTheme();
+  const {Fonts, Gutters, Layout} = useTheme();
   const dispatch = useDispatch();
-
-  const onChangeTheme = ({theme, darkMode}: Partial<ThemeState>) => {
-    dispatch(changeTheme({theme, darkMode}));
-  };
-
-  const onChangeLanguage = (lang: 'fr' | 'en') => {
-    i18next.changeLanguage(lang);
-  };
 
   return (
     <ScrollView
@@ -53,7 +41,9 @@ const EditContact = () => {
               style={[Fonts.textBold, Fonts.titleSmall, Gutters.tinyBMargin]}>
               First Name
             </Text>
-            <TextInput style={styles.input} placeholder="Enter name" >{data?.name}</TextInput>
+            <TextInput style={styles.input} placeholder="Enter name">
+              {data?.name}
+            </TextInput>
           </View>
 
           <View style={[Gutters.smallMargin]}>
@@ -61,7 +51,9 @@ const EditContact = () => {
               style={[Fonts.textBold, Fonts.titleSmall, Gutters.tinyBMargin]}>
               Phone Number
             </Text>
-            <TextInput style={styles.input} placeholder="Enter Phone number">{data?.phone}</TextInput>
+            <TextInput style={styles.input} placeholder="Enter Phone number">
+              {data?.phone}
+            </TextInput>
           </View>
 
           <View style={[Gutters.smallMargin]}>
