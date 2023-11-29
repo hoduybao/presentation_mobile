@@ -45,20 +45,13 @@ const AddContact = () => {
       ]}>
       <View style={[Layout.fullSize]}>
         <View style={[Layout.col, Layout.fullHeight, Gutters.smallTMargin]}>
-          <View style={[Gutters.smallMargin]}>
-            <Text
-              style={[Fonts.textBold, Fonts.titleSmall, Gutters.tinyBMargin]}>
-              First Name
-            </Text>
-            <TextInput style={styles.input} placeholder="Enter First name" />
-          </View>
 
           <View style={[Gutters.smallMargin]}>
             <Text
               style={[Fonts.textBold, Fonts.titleSmall, Gutters.tinyBMargin]}>
               Last Name
             </Text>
-            <TextInput style={styles.input} placeholder="Enter Last name" />
+            <TextInput style={styles.input} placeholder="Enter name" />
           </View>
 
           <View style={[Gutters.smallMargin]}>

@@ -13,9 +13,19 @@ import {useTheme} from '../../hooks';
 import {changeTheme, ThemeState} from '../../store/theme';
 import i18next from 'i18next';
 import {Colors, FontSize} from '@/theme/Variables';
+import {RouteProp, useRoute} from '@react-navigation/native';
+
+// Define the type for route parameters
+type DetailContactRouteParams = {
+  data: any;
+  navigation: any;
+};
 
 const EditContact = () => {
   const {t} = useTranslation(['example', 'welcome']);
+  const route =
+    useRoute<RouteProp<Record<string, DetailContactRouteParams>, string>>();
+  const {data, navigation} = route.params;
   const {Common, Fonts, Gutters, Layout, Images, darkMode: isDark} = useTheme();
   const dispatch = useDispatch();
 
@@ -43,15 +53,7 @@ const EditContact = () => {
               style={[Fonts.textBold, Fonts.titleSmall, Gutters.tinyBMargin]}>
               First Name
             </Text>
-            <TextInput style={styles.input} placeholder="Enter First name" />
-          </View>
-
-          <View style={[Gutters.smallMargin]}>
-            <Text
-              style={[Fonts.textBold, Fonts.titleSmall, Gutters.tinyBMargin]}>
-              Last Name
-            </Text>
-            <TextInput style={styles.input} placeholder="Enter Last name" />
+            <TextInput style={styles.input} placeholder="Enter name" >{data?.name}</TextInput>
           </View>
 
           <View style={[Gutters.smallMargin]}>
@@ -59,12 +61,12 @@ const EditContact = () => {
               style={[Fonts.textBold, Fonts.titleSmall, Gutters.tinyBMargin]}>
               Phone Number
             </Text>
-            <TextInput style={styles.input} placeholder="Enter Phone number" />
+            <TextInput style={styles.input} placeholder="Enter Phone number">{data?.phone}</TextInput>
           </View>
 
           <View style={[Gutters.smallMargin]}>
             <TouchableOpacity style={[styles.button, Layout.alignItemsCenter]}>
-                <Text style={styles.appButtonText}>Save</Text>
+              <Text style={styles.appButtonText}>Save</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -91,11 +93,11 @@ const styles = StyleSheet.create({
   },
   appButtonText: {
     fontSize: 18,
-    color: "#fff",
-    fontWeight: "bold",
-    textAlign: "center",
-    textTransform: "uppercase"
-  }
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+  },
 });
 
 export default EditContact;

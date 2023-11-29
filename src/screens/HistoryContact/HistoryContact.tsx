@@ -8,10 +8,10 @@ import {useTranslation} from 'react-i18next';
 import {useTheme} from '../../hooks';
 import {changeTheme, ThemeState} from '../../store/theme';
 import i18next from 'i18next';
-import ContactList from '@/components/ContactList/ContactList';
 import { FAB } from 'react-native-elements';
+import { HistoryList } from '@/components';
 
-const MainContact = ({navigation} : any) => {
+const HistoryContact = ({navigation} : any) => {
   const {t} = useTranslation(['example', 'welcome']);
   const {Common, Fonts, Gutters, Layout,Colors ,Images, darkMode: isDark} = useTheme();
   const dispatch = useDispatch();
@@ -34,8 +34,8 @@ const MainContact = ({navigation} : any) => {
         Layout.colCenter,
         Layout.scrollSpaceBetween,
       ]}>
-      <View style= {[Layout.fullSize, Gutters.smallLMargin]}>
-        <ContactList navigation={navigation} />
+      <View style= {[Layout.fullSize, Gutters.tinyMargin]}>
+        <HistoryList />
       </View>
       <FAB
         visible={true}
@@ -52,5 +52,5 @@ const MainContact = ({navigation} : any) => {
 
 }
 
-export default MainContact;
+export default HistoryContact;
 
