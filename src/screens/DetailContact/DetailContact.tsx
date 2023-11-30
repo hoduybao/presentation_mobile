@@ -4,6 +4,10 @@ import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements'; // Hoặc import từ thư viện icon khác
+import {deletecontact} from '../../store/contactAction';
+import {useDispatch} from 'react-redux';
+
+import {ThunkDispatch} from '@reduxjs/toolkit';
 
 // Define the type for route parameters
 type DetailContactRouteParams = {
@@ -15,6 +19,7 @@ const DetailContact = () => {
   const route =
     useRoute<RouteProp<Record<string, DetailContactRouteParams>, string>>();
   const {data, navigation} = route.params;
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
   // Function to handle actions like message, call, edit
   const handleMessage = () => {
@@ -31,7 +36,8 @@ const DetailContact = () => {
   };
 
   const handleDelete = () => {
-    // Handle delete action
+    dispatch(deletecontact(data?.id));
+    navigation.goBack();
   };
 
   return (

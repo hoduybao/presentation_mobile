@@ -1,4 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
+import * as actions from './contactAction';
+
 const contactsData = [
   {
     id: 1,
@@ -21,6 +23,7 @@ const contactSlice = createSlice({
   initialState: {
     listContact: contactsData,
     listHistory: [],
+    isLoading: false,
   },
   reducers: {
     addContact: (state, payload) => {
@@ -39,6 +42,41 @@ const contactSlice = createSlice({
     //     return value.id != payload.id;
     //   });
     // },
+  },
+  extraReducers: builder => {
+    builder.addCase(actions.getAll.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(actions.getAll.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.listContact = action.payload;
+    });
+
+    builder.addCase(actions.getAll.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(actions.editContact.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(actions.editContact.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.listContact = action.payload;
+    });
+
+    builder.addCase(actions.editContact.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(actions.deletecontact.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(actions.deletecontact.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.listContact = action.payload;
+    });
+
+    builder.addCase(actions.deletecontact.rejected, (state, action) => {
+      state.isLoading = false;
+    });
   },
 });
 export default contactSlice.reducer;

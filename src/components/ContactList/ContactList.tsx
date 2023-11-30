@@ -1,25 +1,8 @@
 import React from 'react';
 import {View, FlatList, Image, Text, StyleSheet} from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useTheme} from '../../hooks';
-
-const contactsData = [
-  {
-    id: '1',
-    name: 'John Doe',
-    phone: '0935366008',
-    avatar:
-      'https://s3.cloud.cmctelecom.vn/tinhte2/2020/09/5136156_IMG_20200902_023158.jpg',
-  },
-  {
-    id: '2',
-    name: 'Jack Cusion',
-    phone: '0935366008',
-    avatar:
-      'https://s3.cloud.cmctelecom.vn/tinhte2/2020/09/5136156_IMG_20200902_023158.jpg',
-  },
-  // Add more contacts as needed
-];
+import {useSelector} from 'react-redux';
 
 const ContactListItem = ({name, avatar}: any) => {
   const {Common, Fonts, Gutters, Layout, Images, darkMode: isDark} = useTheme();
@@ -39,16 +22,21 @@ const ContactListItem = ({name, avatar}: any) => {
   );
 };
 
-const ContactList = ({ navigation }: any) => {
+const ContactList = ({navigation}: any) => {
+  const {listContact} = useSelector(state => state.contactReducer);
   return (
     <FlatList
-      data={contactsData}
+      data={listContact}
       keyExtractor={item => item.id}
       renderItem={({item}) => (
-        <TouchableOpacity onPress={() =>{
-            navigation.navigate('DetailContact', {data: item, navigation: navigation});
-        }}>
-            <ContactListItem {...item} />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('DetailContact', {
+              data: item,
+              navigation: navigation,
+            });
+          }}>
+          <ContactListItem {...item} />
         </TouchableOpacity>
       )}
     />

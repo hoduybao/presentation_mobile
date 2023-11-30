@@ -1,15 +1,11 @@
 import React, {useEffect} from 'react';
 import {View, ScrollView} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {useSelector} from 'react-redux';
 
 import {useTheme} from '../../hooks';
 import ContactList from '@/components/ContactList/ContactList';
 import {FAB} from 'react-native-elements';
 
 const MainContact = ({navigation}: any) => {
-  const {listContact} = useSelector(state => state.contactReducer);
-  console.log(listContact); 
   const {Gutters, Layout, Colors} = useTheme();
 
   return (

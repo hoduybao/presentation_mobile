@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react';
+/* eslint-disable prettier/prettier */
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,6 +12,9 @@ import {useDispatch} from 'react-redux';
 import {useTheme} from '../../hooks';
 import {Colors, FontSize} from '@/theme/Variables';
 import {RouteProp, useRoute} from '@react-navigation/native';
+import {ThunkDispatch} from '@reduxjs/toolkit';
+
+import {editContact} from '../../store/contactAction';
 
 // Define the type for route parameters
 type DetailContactRouteParams = {
@@ -21,10 +25,30 @@ type DetailContactRouteParams = {
 const EditContact = () => {
   const route =
     useRoute<RouteProp<Record<string, DetailContactRouteParams>, string>>();
-  const {data, navigation} = route.params;
-  const {Fonts, Gutters, Layout} = useTheme();
-  const dispatch = useDispatch();
+  var {data, navigation} = route.params;
 
+  const {Fonts, Gutters, Layout} = useTheme();
+  const [textInputValue, setTextInputValue] = useState(data?.name);
+  const [textInputPhone, setTextInputPhone] = useState(data?.phone);
+
+  const handleChange = text => {
+    // Update the state with the new text value
+    setTextInputValue(text);
+  };
+  const handleChangePhone = text => {
+    // Update the state with the new text value
+    setTextInputPhone(text);
+  };
+
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+
+  const handleEdit = () => {
+    const newData = {...data, name: textInputValue, phone: textInputPhone};
+
+   dispatch(editContact(newData));
+   data=newData;
+   navigation?.navigate('DetailContact', {data, navigation});
+  };
   return (
     <ScrollView
       style={Layout.fill}
@@ -41,7 +65,10 @@ const EditContact = () => {
               style={[Fonts.textBold, Fonts.titleSmall, Gutters.tinyBMargin]}>
               First Name
             </Text>
-            <TextInput style={styles.input} placeholder="Enter name">
+            <TextInput
+              style={styles.input}
+              placeholder="Enter name"
+              onChangeText={handleChange}>
               {data?.name}
             </TextInput>
           </View>
@@ -51,13 +78,18 @@ const EditContact = () => {
               style={[Fonts.textBold, Fonts.titleSmall, Gutters.tinyBMargin]}>
               Phone Number
             </Text>
-            <TextInput style={styles.input} placeholder="Enter Phone number">
+            <TextInput
+              style={styles.input}
+              placeholder="Enter Phone number"
+              onChange={handleChangePhone}>
               {data?.phone}
             </TextInput>
           </View>
 
           <View style={[Gutters.smallMargin]}>
-            <TouchableOpacity style={[styles.button, Layout.alignItemsCenter]}>
+            <TouchableOpacity
+              style={[styles.button, Layout.alignItemsCenter]}
+              onPress={handleEdit}>
               <Text style={styles.appButtonText}>Save</Text>
             </TouchableOpacity>
           </View>
