@@ -31,11 +31,11 @@ const EditContact = () => {
   const [textInputValue, setTextInputValue] = useState(data?.name);
   const [textInputPhone, setTextInputPhone] = useState(data?.phone);
 
-  const handleChange = text => {
+  const handleChange = (text: any) => {
     // Update the state with the new text value
     setTextInputValue(text);
   };
-  const handleChangePhone = text => {
+  const handleChangePhone = (text: any) => {
     // Update the state with the new text value
     setTextInputPhone(text);
   };

@@ -1,6 +1,6 @@
-import {useColorScheme} from 'react-native';
-import {useSelector} from 'react-redux';
-import {DarkTheme, DefaultTheme} from '@react-navigation/native';
+import { useColorScheme } from 'react-native';
+import { useSelector } from 'react-redux';
+import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 import {
   Common,
   Fonts,
@@ -10,7 +10,7 @@ import {
   themes,
   DefaultVariables,
 } from '../theme';
-import {ThemeState} from '../store/theme';
+
 import {
   ThemeVariables,
   Theme,
@@ -41,7 +41,7 @@ export default function () {
   }
 
   if (darkMode) {
-    const {Variables, ...darkThemeConfig} =
+    const { Variables, ...darkThemeConfig } =
       themes[`${currentTheme}_dark` as keyof typeof themes] || {};
 
     darkVariables = Variables;

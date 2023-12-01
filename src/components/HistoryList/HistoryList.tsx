@@ -52,7 +52,7 @@ const ContactListItem = ({id, name, phone, avatar, time, navigation}: any) => {
 };
 
 const ContactList = ({navigation}: any) => {
-  const {listHistory} = useSelector(state => state.contactReducer);
+  const {listHistory} = useSelector((state: any) => state.contactReducer);
 
   return (
     <FlatList

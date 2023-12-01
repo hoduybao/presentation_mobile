@@ -23,7 +23,7 @@ const ContactListItem = ({name, avatar}: any) => {
 };
 
 const ContactList = ({navigation}: any) => {
-  const {listContact} = useSelector(state => state.contactReducer);
+  const {listContact} = useSelector((state: any) => state.contactReducer);
   return (
     <FlatList
       data={listContact}

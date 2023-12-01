@@ -30,12 +30,12 @@ const AddContact = () => {
 
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
 
-  const handleChangePhone = text => {
+  const handleChangePhone = (text: any) => {
     // Update the state with the new text value
     setTextInputPhone(text);
   };
 
-  const handleChangeName = text => {
+  const handleChangeName = (text: any) => {
     // Update the state with the new text value
     setTextInputName(text);
   };

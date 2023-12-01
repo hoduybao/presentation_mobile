@@ -1,4 +1,4 @@
-import {createAsyncThunk} from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   apiAddContact,
   apiHistory,
@@ -23,7 +23,7 @@ type NewContactType = {
 
 export const getAll = createAsyncThunk(
   'contact/getAll',
-  async (data, {rejectWithValue}) => {
+  async (data, { rejectWithValue }) => {
     const response = await apiContact();
     if (response?.status !== 200) {
       return rejectWithValue(response?.data);
@@ -34,7 +34,7 @@ export const getAll = createAsyncThunk(
 );
 export const getAllHistory = createAsyncThunk(
   'contact/getAllHistory',
-  async (data, {rejectWithValue}) => {
+  async (data, { rejectWithValue }) => {
     const response = await apiHistory();
     if (response?.status !== 200) {
       return rejectWithValue(response?.data);
@@ -46,7 +46,7 @@ export const getAllHistory = createAsyncThunk(
 
 export const editContact = createAsyncThunk(
   'contact/edit',
-  async (data: ContactType, {rejectWithValue}) => {
+  async (data: ContactType, { rejectWithValue }) => {
     const response = await apiEditContact(data);
     if (response?.status !== 200) {
       return rejectWithValue(response?.data);
@@ -58,7 +58,7 @@ export const editContact = createAsyncThunk(
 
 export const deletecontact = createAsyncThunk(
   'contact/delete',
-  async (data: number, {rejectWithValue}) => {
+  async (data: number, { rejectWithValue }) => {
     const response = await deleteContact(data);
     if (response?.status !== 200) {
       return rejectWithValue(response?.data);
@@ -70,7 +70,7 @@ export const deletecontact = createAsyncThunk(
 
 export const addContact = createAsyncThunk(
   'contact/add',
-  async (data: NewContactType, {rejectWithValue}) => {
+  async (data: NewContactType, { rejectWithValue }) => {
     const response = await apiAddContact(data);
     if (response?.status !== 200) {
       return rejectWithValue(response?.data);
@@ -82,7 +82,7 @@ export const addContact = createAsyncThunk(
 
 export const updateHistory = createAsyncThunk(
   'contact/updateHistory',
-  async (data: ContactType, {rejectWithValue}) => {
+  async (data: ContactType, { rejectWithValue }) => {
     const response = await apiUpdateHistory(data);
     if (response?.status !== 200) {
       return rejectWithValue(response?.data);
