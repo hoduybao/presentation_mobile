@@ -18,7 +18,7 @@ const HistoryContact = ({navigation}: any) => {
         Layout.scrollSpaceBetween,
       ]}>
       <View style={[Layout.fullSize, Gutters.tinyMargin]}>
-        <HistoryList />
+        <HistoryList navigation={navigation} />
       </View>
     </ScrollView>
   );

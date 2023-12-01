@@ -8,7 +8,7 @@ import {
 import {AddContact} from '../screens';
 import {useTheme} from '../hooks';
 import {useDispatch} from 'react-redux';
-import {getAll} from '../store/contactAction';
+import {getAll, getAllHistory} from '../store/contactAction';
 
 import MainNavigator from './Main';
 import {useFlipper} from '@react-navigation/devtools';
@@ -28,6 +28,7 @@ const ApplicationNavigator = () => {
 
   useEffect(() => {
     dispatch(getAll());
+    dispatch(getAllHistory());
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -10,10 +10,57 @@ import {
 import {useDispatch} from 'react-redux';
 import {useTheme} from '../../hooks';
 import {Colors} from '@/theme/Variables';
+import {addContact, updateHistory} from '@/store/contactAction';
+import {ThunkDispatch} from '@reduxjs/toolkit';
+import {RouteProp, useRoute} from '@react-navigation/native';
+
+type AddContactRouteParams = {
+  data: any;
+  navigation: any;
+};
 
 const AddContact = () => {
+  const route =
+    useRoute<RouteProp<Record<string, AddContactRouteParams>, string>>();
   const {Fonts, Gutters, Layout, darkMode: isDark} = useTheme();
-  const dispatch = useDispatch();
+  const {data, navigation} = route.params;
+
+  const [textInputName, setTextInputName] = useState('');
+  const [textInputPhone, setTextInputPhone] = useState(data ? data.phone : '');
+
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+
+  const handleChangePhone = text => {
+    // Update the state with the new text value
+    setTextInputPhone(text);
+  };
+
+  const handleChangeName = text => {
+    // Update the state with the new text value
+    setTextInputName(text);
+  };
+
+  const handleAdd = () => {
+    // Update the state with the new text value
+    const newData = {
+      name: textInputName,
+      phone: textInputPhone,
+      avatar:
+        'https://s3.cloud.cmctelecom.vn/tinhte2/2020/09/5136156_IMG_20200902_023158.jpg',
+    };
+
+    dispatch(addContact(newData));
+    if (data) {
+      console.log(data.id);
+      const dataUpdate = {
+        ...newData,
+        id: data.id,
+      };
+      dispatch(updateHistory(dataUpdate));
+    }
+    //  data=newData;
+    navigation.goBack();
+  };
 
   return (
     <ScrollView
@@ -31,7 +78,11 @@ const AddContact = () => {
               style={[Fonts.textBold, Fonts.titleSmall, Gutters.tinyBMargin]}>
               Last Name
             </Text>
-            <TextInput style={styles.input} placeholder="Enter name" />
+            <TextInput
+              style={styles.input}
+              onChangeText={handleChangeName}
+              placeholder="Enter name"
+            />
           </View>
 
           <View style={[Gutters.smallMargin]}>
@@ -39,11 +90,18 @@ const AddContact = () => {
               style={[Fonts.textBold, Fonts.titleSmall, Gutters.tinyBMargin]}>
               Phone Number
             </Text>
-            <TextInput style={styles.input} placeholder="Enter Phone number" />
+            <TextInput
+              style={styles.input}
+              onChangeText={handleChangePhone}
+              placeholder="Enter Phone number">
+              {textInputPhone}
+            </TextInput>
           </View>
 
           <View style={[Gutters.smallMargin]}>
-            <TouchableOpacity style={[styles.button, Layout.alignItemsCenter]}>
+            <TouchableOpacity
+              style={[styles.button, Layout.alignItemsCenter]}
+              onPress={handleAdd}>
               <Text style={styles.appButtonText}>Save</Text>
             </TouchableOpacity>
           </View>

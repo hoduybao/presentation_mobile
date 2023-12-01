@@ -23,7 +23,7 @@ const MainContact = ({navigation}: any) => {
       <FAB
         visible={true}
         onPress={() => {
-          navigation.navigate('AddContact');
+          navigation.navigate('AddContact', {navigation: navigation});
         }}
         placement="right"
         title="Add Contact"

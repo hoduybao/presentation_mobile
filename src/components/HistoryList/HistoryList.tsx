@@ -4,26 +4,15 @@ import {useTheme} from '../../hooks';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Colors} from '@/theme/Variables';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useSelector} from 'react-redux';
 
-const contactsData = [
-  {
-    id: '1',
-    name: 'John Doe',
-    time: '22/11/2022',
-    avatar:
-      'https://s3.cloud.cmctelecom.vn/tinhte2/2020/09/5136156_IMG_20200902_023158.jpg',
-  },
-  {
-    id: '2',
-    name: 'Joshep',
-    time: '22/11/2022',
-    avatar:
-      'https://s3.cloud.cmctelecom.vn/tinhte2/2020/09/5136156_IMG_20200902_023158.jpg',
-  },
-  // Add more contacts as needed
-];
-
-const ContactListItem = ({name, avatar, time}: any) => {
+const ContactListItem = ({id, name, phone, avatar, time, navigation}: any) => {
+  const data = {
+    id: id,
+    phone: phone,
+    avatar: avatar,
+    time: time,
+  };
   const {Common, Fonts, Gutters, Layout, Images, darkMode: isDark} = useTheme();
 
   return (
@@ -43,12 +32,17 @@ const ContactListItem = ({name, avatar, time}: any) => {
           Layout.alignItemsCenter,
           Layout.justifyContentBetween,
         ]}>
-        <Text style={[Fonts.textBold, Fonts.textRegular]}>{name}</Text>
+        <Text style={[Fonts.textBold, Fonts.textRegular]}>
+          {name ? name : phone}
+        </Text>
         <View style={[Layout.row, Layout.alignItemsCenter]}>
           <Text style={[Fonts.textSmall, Fonts.textLight, Gutters.tinyRMargin]}>
             {time}
           </Text>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('AddContact', {data, navigation});
+            }}>
             <Ionicons name="information-circle" size={28} color={Colors.blue} />
           </TouchableOpacity>
         </View>
@@ -57,12 +51,16 @@ const ContactListItem = ({name, avatar, time}: any) => {
   );
 };
 
-const ContactList = () => {
+const ContactList = ({navigation}: any) => {
+  const {listHistory} = useSelector(state => state.contactReducer);
+
   return (
     <FlatList
-      data={contactsData}
+      data={listHistory}
       keyExtractor={item => item.id}
-      renderItem={({item}) => <ContactListItem {...item} />}
+      renderItem={({item}) => (
+        <ContactListItem {...item} navigation={navigation} />
+      )}
     />
   );
 };
